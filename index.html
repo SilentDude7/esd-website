@@ -1,1 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESD Portfolio - My Learning Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        /* Lectures Section */
+        .lectures {
+            background-color: var(--light);
+        }
+
+        .lecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .lecture-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .lecture-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .lecture-card::after {
+            content: 'Click to view details →';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .lecture-card:hover::after {
+            opacity: 1;
+        }
+
+        .lecture-content {
+            padding: 25px;
+        }
+
+        .lecture-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .lecture-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .lecture-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .lecture-tag {
+            background-color: var(--light);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+
+        .lecture-tag.workshop {
+            background-color: #a29bfe;
+            color: white;
+        }
+
+        .lecture-tag.professional {
+            background-color: #74b9ff;
+            color: white;
+        }
+
+        .lecture-tag.technical {
+            background-color: #55efc4;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        /* Detail Page Styles */
+        .detail-page {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            gap: 12px;
+        }
+
+        .detail-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .detail-date {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-section {
+            margin-bottom: 30px;
+        }
+
+        .detail-section h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .learning-outcomes {
+            list-style: none;
+        }
+
+        .learning-outcomes li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .learning-outcomes li:before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .skills-developed {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .skill-pill {
+            background: linear-gradient(135deg, var(--primary), #2980b9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .key-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .highlight {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+
+        .highlight i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .reflection {
+            background: linear-gradient(135deg, #f6e58d, #ffbe76);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e67e22;
+            font-style: italic;
+        }
+
+        .activity-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .improvement-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .action-plan {
+            background-color: #e8f6ef;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .image-gallery.single-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .lecture-image {
+            width: 100%;
+            max-width: 320px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .lecture-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-placeholder {
+            background-color: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            transition: var(--transition);
+        }
+
+        .image-placeholder:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .image-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--light);
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+
+            .detail-content {
+                padding: 25px;
+            }
+
+            .image-gallery.single-image {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .lecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+
+            .highlight {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .image-gallery.single-image {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">ESD Portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#lectures">Lectures</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Page Content -->
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>My ESD Learning Journey</h1>
+                <p>A comprehensive portfolio showcasing my learning and growth through the Employability Skills Development module at SLIIT.</p>
+                <a href="#lectures" class="btn">Explore Lectures</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About My Learning Journey</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>This portfolio represents my educational journey through the Employability Skills Development (ESD) module, covering various aspects of professional and personal development essential for career success.</p>
+                        <p>Throughout this semester, I've learned about networking, professional grooming, entrepreneurship, quality assurance, self-defense, and much more. This portfolio showcases the progression of my understanding and the valuable experiences I've gained along the way.</p>
+                        <p>My goal is to continue building upon this foundation, applying these lessons to both my academic pursuits and future career in the IT industry.</p>
+                        <a href="#lectures" class="btn">View Lectures</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lectures" id="lectures">
+            <div class="container">
+                <h2>Lectures</h2>
+                <div class="lecture-grid">
+                    <!-- Lecture cards will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ESD Portfolio</h3>
+                    <p>A comprehensive showcase of my educational journey through the Employability Skills Development module.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#lectures">Lectures</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Session Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Professional Development</a></li>
+                        <li><a href="#">Workshops</a></li>
+                        <li><a href="#">Guest Lectures</a></li>
+                        <li><a href="#">Career Preparation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ESD Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Lecture Data
+        const lectures = [
+            {
+                id: 1,
+                date: "03/06/2025",
+                title: "Introduction to ESD",
+                description: "Introduction to the Employability Skills Development module, course structure, and learning outcomes.",
+                category: "professional",
+                tags: ["ESD", "Professional Development", "Foundations"],
+                images: [], // No images for lecture 1
+                detail: {
+                    summary: "The first session introduced the Employability Skills Development (ESD) module and its overall objectives. The lecturer explained how ESD focuses on improving skills such as communication, teamwork, adaptability, and professional awareness. We discussed how employability skills go beyond technical knowledge and play a major role in shaping our professional identity. During the class, we shared ideas about what employers look for and identified our own strengths and weaknesses through small self-assessment activities and chits we passed around. This helped me understand the real purpose of the module, to prepare us for life after graduation.",
+                    keyInsights: [
+                        "Understanding the ESD framework and its importance",
+                        "Identifying key professional skills for career success",
+                        "Setting personal development goals for the semester",
+                        "Learning about the session structure and expectations"
+                    ],
+                    classActivities: [
+                        "Self-assessment activities to identify strengths and weaknesses",
+                        "Group discussion on what employers look for in candidates",
+                        "Sharing ideas through chits passed around the class"
+                    ],
+                    examples: "We discussed how employability skills go beyond academic knowledge and include communication, teamwork, adaptability, and self-awareness.",
+                    extraResearch: "After the lecture, I explored different frameworks of employability such as the World Economic Forum's 'Top 10 Skills of the Future' and compared them with the ESD skills we were learning. I also read online about how IT companies in Sri Lanka assess graduates beyond academic qualifications, focusing instead on teamwork and communication.",
+                    skills: ["Goal Setting", "Self-Assessment", "Professional Awareness"],
+                    selfImprovement: "I plan to build stronger communication and interpersonal skills, learn to reflect effectively on personal progress, explore various IT-related job roles and their skill requirements, improve presentation and communication confidence, and participate more actively in group discussions.",
+                    actionPlan: "My action plan includes engaging actively in weekly workshops and discussions, conducting additional research on different career paths, keeping a reflection log after each lecture, and practicing self-reflection weekly to monitor progress.",
+                    reflection: "During the first week, I was introduced to the Employability Skills Development module and its objectives. I learned about the importance of employability skills in shaping my professional identity and preparing for future career opportunities. The session also provided an overview of the assessments, expectations, and weekly structure, helping me understand what I need to accomplish throughout the semester."
+                }
+            },
+            {
+                id: 2,
+                date: "10/06/2025",
+                title: "Student Success Toolkit",
+                description: "Well-being, relationship skills, and mental health for academic and personal success.",
+                category: "professional",
+                tags: ["Well-being", "Mental Health", "Relationships"],
+                images: ["photo/Lec2.jpeg", "photo/Lec2P2.jpeg"],
+                detail: {
+                    summary: "This session focused on the importance of mental health, emotional intelligence, and mindfulness for academic and personal success. We learned about stress management, self-esteem, and the value of positive thinking. The lecturer introduced us to Sternberg's Triangular Theory of Love and explained the DOSE hormones, Dopamine, Oxytocin, Serotonin, and Endorphin, that influence happiness. We also shared short chits about what motivates us and practiced mindfulness breathing exercises together.",
+                    keyInsights: [
+                        "Understanding exam stress and effective coping strategies",
+                        "Learning about brain health and neuroplasticity",
+                        "Developing healthy relationship management skills",
+                        "Practicing mindfulness and self-esteem building techniques"
+                    ],
+                    classActivities: [
+                        "Discussion on exam stress and coping mechanisms",
+                        "Group activity on relationship scenarios",
+                        "Mindfulness breathing exercise practice",
+                        "Sharing motivation factors through chits"
+                    ],
+                    examples: "We explored Sternberg's Triangular Theory of Love which includes Passion, Intimacy, and Commitment as core elements of relationships.",
+                    extraResearch: "After class, I researched how mindfulness improves concentration and memory, discovering several studies that link meditation to better academic performance. I also watched a TED Talk on managing exam stress, which gave me practical breathing and relaxation tips.",
+                    skills: ["Stress Management", "Mindfulness", "Relationship Building", "Self-Esteem"],
+                    selfImprovement: "I will practice daily mindfulness (5-10 minutes per day), build self-esteem through positive affirmations, improve time management and avoid procrastination, set healthy boundaries in relationships, and balance studies with self-care and emotional well-being.",
+                    actionPlan: "I plan to create a consistent weekly study plan with built-in breaks, start a gratitude and mindfulness journal, engage in physical activity at least 3 times a week to improve focus, reflect weekly on my progress in managing stress and building self-worth, and include short mindfulness or gratitude exercises into my daily routine.",
+                    reflection: "This week's lecture was eye-opening and deeply relevant to my personal life as a student. I realized that academic success is not just about intelligence or hard work — it's about mental balance, emotional intelligence, and self-care. I learned practical strategies to handle stress more effectively and to cultivate healthier relationships both inside and outside the university."
+                }
+            },
+            {
+                id: 3,
+                date: "17/06/2025",
+                title: "Networking & Business Etiquette",
+                description: "Professional networking, business etiquette, and grooming for career success.",
+                category: "professional",
+                tags: ["Networking", "Business Etiquette", "Professionalism"],
+                images: ["photo/Lec3.jpeg", "photo/Lec3P2.jpeg"],
+                detail: {
+                    summary: "This lecture was all about building meaningful professional connections. We learned the '24/7/30 rule,' the VCP model (Visibility, Credibility, Profitability), and the Ten Commandments of Networking. Through fun activities, we practiced introducing ourselves professionally and maintaining good conversation etiquette. We also exchanged chits containing compliments and professional greetings to build confidence.",
+                    keyInsights: [
+                        "Understanding networking principles and the 24/7/30 rule",
+                        "Learning the VCP Model (Visibility, Credibility, Profitability)",
+                        "Mastering the 10 Commandments of Networking",
+                        "Developing professional grooming and presentation skills"
+                    ],
+                    classActivities: [
+                        "Role-playing networking conversations",
+                        "Practicing professional introductions",
+                        "Group discussion on networking experiences",
+                        "Exchanging chits with compliments and professional greetings"
+                    ],
+                    examples: "We practiced the 'Give First' principle in networking - offering help before expecting something in return.",
+                    extraResearch: "I looked up how professionals use LinkedIn effectively and explored the difference between personal and professional networking. I also learned about digital etiquette, especially when communicating via email and LinkedIn.",
+                    skills: ["Networking", "Professional Communication", "Business Etiquette", "Personal Branding"],
+                    selfImprovement: "I need to practice maintaining conversations with new people confidently, improve my personal presentation (dress code and posture), strengthen my online professional presence (LinkedIn profile), learn to follow up consistently after making new connections, and improve how I introduce myself and make a lasting impression.",
+                    actionPlan: "I will attend at least one networking event or club activity this semester, connect with at least 5 industry professionals on LinkedIn, prepare a short personal introduction for future networking opportunities, review my grooming and attire before presentations or interviews, and rewrite my LinkedIn bio and attend networking events to practice these skills.",
+                    reflection: "This week's session made me realize that networking is not about collecting contacts — it's about building genuine relationships. I used to think networking was only for business owners, but now I understand it's a critical skill for all professionals. The grooming section also reminded me that first impressions often start with appearance and confidence, not just qualifications."
+                }
+            },
+            {
+                id: 4,
+                date: "24/06/2025",
+                title: "Quality Assurance Workshop",
+                description: "Practical QA testing workshop with insights into AI's role in software testing.",
+                category: "workshop",
+                tags: ["QA", "Software Testing", "AI", "Workshop"],
+                images: ["photo/Lec4.jpeg"], // Only 1 image for lecture 4
+                detail: {
+                    summary: "The Quality Assurance workshop focused on understanding the role of testing in software development. We explored manual and automation testing and discussed how AI is transforming QA processes. During the session, we tested a real website to identify bugs and user interface problems, writing our observations on chits to share findings with others. It gave me insight into how QA ensures a smooth and reliable user experience.",
+                    keyInsights: [
+                        "Understanding QA processes and testing methodologies",
+                        "Learning different types of testing (manual, automation, functional, regression)",
+                        "Exploring AI's impact on QA (Generative AI and Agentic AI)",
+                        "Developing analytical thinking for bug identification"
+                    ],
+                    classActivities: [
+                        "Website testing activity (identifying bugs and issues)",
+                        "Group sharing of test findings and improvement suggestions",
+                        "Writing observations on chits to share findings"
+                    ],
+                    examples: "We tested a live website to identify UI/UX issues, functionality bugs, and performance problems.",
+                    extraResearch: "I researched tools such as Selenium, Testim, and Applitools to learn how automation testing works. I also found out how companies integrate AI into QA pipelines for faster and more accurate testing.",
+                    skills: ["QA Testing", "Bug Identification", "Analytical Thinking", "AI Literacy"],
+                    selfImprovement: "I need to improve attention to detail and analytical thinking, learn the basics of QA testing tools and automation frameworks, stay updated on AI technologies related to QA, develop the habit of documenting observations clearly and systematically, and strengthen attention to detail and learn automation tools.",
+                    actionPlan: "I plan to explore beginner-friendly QA tools like Selenium or JIRA, watch tutorials on AI-based testing automation, practice identifying UI/UX bugs on different websites weekly, read about real-world QA case studies to understand industry standards, and document testing results more systematically to improve analytical skills.",
+                    reflection: "This session made me appreciate QA as more than just 'testing' — it's about ensuring user satisfaction, reliability, and continuous improvement. I realized that QA testers play a critical role in shaping user experience and preventing costly errors. The introduction to AI's impact on QA also motivated me to stay updated on emerging technologies."
+                }
+            },
+            {
+                id: 5,
+                date: "01/07/2025",
+                title: "Entrepreneurship",
+                description: "Guest lecture by Mr. Arshad (Flash Health) on entrepreneurship and startup journey.",
+                category: "professional",
+                tags: ["Entrepreneurship", "Startups", "Innovation"],
+                images: ["photo/Lec5.jpeg", "photo/Lec5P2.jpeg"],
+                detail: {
+                    summary: "This inspiring lecture was conducted by Mr. Arshad, founder of Flash Health. He shared his entrepreneurial journey, explaining how passion, perseverance, and innovation are key to success. We did a fun group activity where we had to pitch a startup idea with a one-million-rupee budget, and I learned how creative thinking and risk management go hand in hand.",
+                    keyInsights: [
+                        "Understanding the entrepreneurial mindset and risk-taking",
+                        "Learning the three chapters of entrepreneurship: Education, Planning, and Fear",
+                        "Developing strategic thinking for business opportunities",
+                        "Exploring the concept of Minimum Viable Product (MVP)"
+                    ],
+                    classActivities: [
+                        "Brainstorming business ideas with 1 million rupees",
+                        "Startup pitch activity in groups"
+                    ],
+                    examples: "Mr. Arshad shared the journey of Flash Health from idea to successful health-tech platform.",
+                    extraResearch: "After class, I researched Flash Health and learned how it revolutionized healthcare delivery in Sri Lanka. I also read about entrepreneurial traits like resilience, time management, and adaptability.",
+                    skills: ["Entrepreneurial Thinking", "Risk Assessment", "Strategic Planning", "Innovation"],
+                    selfImprovement: "I want to develop an entrepreneurial mindset and take initiative in projects, learn basic financial management and investment principles, strengthen my planning and strategic thinking skills, overcome fear of failure by taking small calculated risks, and become more confident in taking calculated risks and thinking innovatively.",
+                    actionPlan: "I will start brainstorming potential business or tech-based project ideas, follow successful local startups to understand their growth journeys, take an online course or watch talks on entrepreneurship and innovation, practice pitching ideas confidently in class or group activities, and brainstorm project ideas and study real startup case studies.",
+                    reflection: "This session was one of the most motivating so far. Listening to a real entrepreneur's story gave me a clear understanding of what it means to build something from the ground up. I realized that entrepreneurship is not just about money — it's about vision, discipline, and resilience."
+                }
+            },
+            {
+                id: 6,
+                date: "08/07/2025",
+                title: "Alumni Talk & HR Aspects",
+                description: "Guest lecture by Mr. Cathum Henegama (Xpress Jobs) on career development and HR expectations.",
+                category: "professional",
+                tags: ["Career Development", "HR", "Personal Branding"],
+                images: ["photo/Lec6.jpeg", "photo/Lec6P2.jpeg"],
+                detail: {
+                    summary: "Mr. Cathum Henegama, CEO of XpressJobs, led this session, focusing on HR expectations and personal branding. He taught us to treat our careers like a product and introduced the concept of the 'Minimum Viable Profile (MVP).' We wrote chits describing our strengths and weaknesses as if we were a brand, which was both fun and eye-opening.",
+                    keyInsights: [
+                        "Understanding the concept of 'Your Career = Your Product'",
+                        "Learning about Minimum Viable Profile (MVP) for career development",
+                        "Identifying common mindset bugs that limit career growth",
+                        "Developing strategies for personal branding and online presence"
+                    ],
+                    classActivities: [
+                        "Writing chits describing strengths and weaknesses as personal brands"
+                    ],
+                    examples: "Mr. Cathum shared real employee feedback examples to demonstrate how attitude affects career progression.",
+                    extraResearch: "I researched how XpressJobs helps employers find suitable candidates and read about career branding strategies. I also explored the STAR method for interviews and LinkedIn optimization tips.",
+                    skills: ["Career Planning", "Personal Branding", "Interview Skills", "Professional Networking"],
+                    selfImprovement: "I need to build and update my LinkedIn profile and GitHub portfolio, improve my communication and interview skills, strengthen time management and research habits, learn the basics of AI tools relevant to my field, and build a strong online professional presence by updating LinkedIn.",
+                    actionPlan: "My plan includes creating a professional LinkedIn profile and start posting updates monthly, contributing to at least one open-source or small freelance project, watching HR and interview prep videos weekly, practicing answering common IT interview questions, and highlighting achievements and practicing interviews regularly.",
+                    reflection: "This session was extremely valuable because it combined HR expectations, career strategy, and personal development. Hearing from a successful alumnus who started as an intern made me realize that career success doesn't happen overnight — it's built through consistency and self-improvement."
+                }
+            },
+            {
+                id: 7,
+                date: "15/07/2025",
+                title: "Grooming & Professional Appearance",
+                description: "Session on personal grooming and professional presentation by Ms. Eranga.",
+                category: "professional",
+                tags: ["Grooming", "Professionalism", "Presentation"],
+                images: [], // No images for lecture 7
+                detail: {
+                    summary: "This lecture highlighted the role of grooming and dressing in professional success. We learned about business formal, smart casual, and business casual attire. The lecturer demonstrated posture, handshake etiquette, and first impressions. During class, we passed chits to rate each other's posture and attire based on professional standards, which was both educational and fun.",
+                    keyInsights: [
+                        "Understanding the importance of grooming in professional settings",
+                        "Learning grooming standards for different professional environments",
+                        "Developing awareness of first impressions and professional etiquette",
+                        "Improving personal presentation and confidence"
+                    ],
+                    classActivities: [
+                        "Rating posture and attire through chits passed around",
+                        "Demonstration of professional handshake and posture"
+                    ],
+                    examples: "We discussed different dress codes: Business Casual, Smart Casual, and Formal attire for various professional settings.",
+                    extraResearch: "I watched YouTube tutorials about dressing appropriately for job interviews and researched how grooming affects confidence and credibility.",
+                    skills: ["Professional Grooming", "Business Etiquette", "Personal Presentation", "Confidence Building"],
+                    selfImprovement: "I plan to maintain a more consistent grooming routine, prepare appropriate outfits for interviews and events, pay attention to small details like nails, shoes, and hair, improve posture and confidence in presentation, and improve posture and prepare a formal interview outfit.",
+                    actionPlan: "I will create a 'professional outfit checklist' for upcoming interviews, practice good posture daily, keep personal hygiene items in my bag for quick touch-ups, observe how professionals in my field dress and model that standard, and pay attention to small grooming habits like personal hygiene.",
+                    reflection: "This session reminded me that appearance is a form of communication. Even though technical skills are important, grooming and etiquette often influence how seriously others take us. I realized I sometimes overlook small things like ironing clothes or checking my posture before an interview."
+                }
+            },
+            {
+                id: 8,
+                date: "22/07/2025",
+                title: "Self-Defense Workshop",
+                description: "Practical self-defense workshop focusing on personal safety techniques.",
+                category: "workshop",
+                tags: ["Self Defense", "Personal Safety", "Workshop"],
+                images: ["photo/Lec8.jpeg", "photo/Lec8P2.jpeg"],
+                detail: {
+                    summary: "This was one of the most energetic and practical sessions. We learned basic self-defense techniques such as choke escapes, situational awareness, and verbal boundaries. The instructor emphasized that self-defense is about awareness, not aggression. We practiced quick reaction movements in pairs and wrote confidence-boosting affirmations on chits.",
+                    keyInsights: [
+                        "Learning basic self-defense techniques and escape moves",
+                        "Developing situational awareness and prevention strategies",
+                        "Understanding the importance of confidence in personal safety",
+                        "Practicing verbal de-escalation techniques"
+                    ],
+                    classActivities: [
+                        "Demonstration of choke escape techniques",
+                        "Individual practice of self-defense moves",
+                        "Peer observation and feedback sessions",
+                        "Writing confidence-boosting affirmations on chits"
+                    ],
+                    examples: "A batchmate participated in a live demonstration of escaping a chokehold during the session.",
+                    extraResearch: "I later researched online safety tips and watched tutorials on how to protect oneself using common objects. I also learned about the psychological aspect of self-defense, staying calm and assertive under pressure.",
+                    skills: ["Self-Defense Techniques", "Situational Awareness", "Risk Assessment", "Confidence Building"],
+                    selfImprovement: "I need to practice self-defense techniques regularly to build muscle memory, improve situational awareness in daily life, stay calm and think clearly in stressful situations, encourage peers to also learn basic self-defense, and improve confidence and awareness in public spaces.",
+                    actionPlan: "I plan to dedicate 10-15 minutes weekly to review and practice self-defense moves, learn additional safety techniques through online tutorials or workshops, apply situational awareness strategies when walking in public spaces, reflect on safety habits regularly to stay prepared, and practice basic moves weekly and adopt a mindset of alertness.",
+                    reflection: "This session made me understand that self-defense is a skill everyone should learn, regardless of age or gender. I learned that confidence, awareness, and knowledge of simple escape techniques are more important than physical strength. Practicing the moves myself gave me a sense of empowerment."
+                }
+            },
+            {
+                id: 9,
+                date: "29/07/2025",
+                title: "Music Appreciation Workshop",
+                description: "Interactive workshop on music appreciation, rhythm, and creativity.",
+                category: "workshop",
+                tags: ["Music", "Creativity", "Workshop"],
+                images: ["photo/Lec9P.jpg"], // Only 1 image for lecture 9
+                detail: {
+                    summary: "This creative session explored rhythm, melody, and teamwork through music. Two instructors demonstrated the piano and tabla, and we participated in rhythm-based group activities. Passing beats around the room using claps and percussion chits taught us teamwork and coordination in a unique way.",
+                    keyInsights: [
+                        "Understanding basic musical elements and rhythm",
+                        "Appreciating the effort and creativity of musicians",
+                        "Discovering music in everyday sounds and environments",
+                        "Developing collaborative creativity through group activities"
+                    ],
+                    classActivities: [
+                        "Group rhythm activity with tapping, clapping, and movement",
+                        "Live student musical performances",
+                        "Passing beats around the room using percussion chits"
+                    ],
+                    examples: "Two instructors demonstrated piano (melody) and tabla (rhythm) to show how different instruments work together in music.",
+                    extraResearch: "I researched how music therapy enhances creativity and focus. I also read about how rhythm improves brain function and stress relief.",
+                    skills: ["Music Appreciation", "Rhythm", "Collaborative Creativity", "Active Listening"],
+                    selfImprovement: "I want to develop a habit of actively listening to music with attention to rhythm and melody, explore creating music from everyday sounds, appreciate and respect musicians and their efforts, practice collaborative creativity in group activities, and include music in study routine to improve focus and relaxation.",
+                    actionPlan: "I will spend time each week listening to different music genres and analyzing them, experiment with creating simple rhythms using everyday objects, attend local music performances or watch live recordings, reflect on how music can enhance creativity in other areas of life, and explore different genres and learn basic music theory.",
+                    reflection: "This session reminded me that music is not just entertainment, but a form of expression and connection. I learned to listen more attentively, appreciate others' efforts, and find creativity in everyday sounds. Participating in the group activity helped me understand the importance of coordination and teamwork."
+                }
+            },
+            {
+                id: 10,
+                date: "05/08/2025",
+                title: "UI/UX Design",
+                description: "Session on UI/UX design principles and creating exceptional digital experiences.",
+                category: "professional",
+                tags: ["UI/UX", "Design", "Digital Products"],
+                images: ["photo/Lec10.jpeg", "photo/Lec10P2.jpeg"],
+                detail: {
+                    summary: "This session focused on user interface (UI) and user experience (UX) design. We learned how to create visually appealing, user-friendly designs that meet real user needs. During the class, I redesigned the WhatsApp interface to show two active chats simultaneously and shared the idea on a chit board.",
+                    keyInsights: [
+                        "Understanding the difference between UI and UX design",
+                        "Learning the UI/UX design process and principles",
+                        "Identifying good and bad design practices",
+                        "Exploring emerging trends and AI's role in frontend development"
+                    ],
+                    classActivities: [
+                        "Hands-on app redesign activity",
+                        "Sharing design ideas on chit board"
+                    ],
+                    examples: "I redesigned WhatsApp with a concept showing two active chats simultaneously for better multitasking.",
+                    extraResearch: "I explored Figma tutorials and case studies of apps with excellent UX like Spotify and Airbnb. I also read about accessibility in UX design and the importance of empathy in understanding user needs.",
+                    skills: ["UI/UX Design", "User-Centered Design", "Wireframing", "Design Thinking"],
+                    selfImprovement: "I plan to develop wireframing and prototyping skills (Figma, Adobe XD), study accessibility guidelines and inclusive design principles, practice designing intuitive user flows for apps, learn to incorporate AI tools in the design process, and strengthen design thinking by creating redesign projects.",
+                    actionPlan: "My action plan includes creating weekly practice projects to redesign simple apps or websites, exploring online UI/UX communities for feedback and inspiration, learning and experimenting with AI-assisted design tools, collecting user feedback on personal design experiments, and creating small redesign projects every week and get feedback.",
+                    reflection: "This session taught me that UI/UX is more than making things look pretty — it's about creating experiences that delight and empower users. Designing the WhatsApp screen made me think critically about user needs, multitasking efficiency, and simplicity. I realized that good design requires empathy, testing, and iteration."
+                }
+            },
+            {
+                id: 11,
+                date: "12/08/2025",
+                title: "From Code to Cloud – Streamlining Deployment with DevOps",
+                description: "Introduction to DevOps approach for moving code from development to production efficiently.",
+                category: "technical",
+                tags: ["DevOps", "CI/CD", "Cloud", "Deployment"],
+                images: [], // No images for lecture 11
+                detail: {
+                    summary: "The final lecture introduced us to DevOps, focusing on automation, deployment pipelines, and cloud computing. We compared traditional manual deployment with CI/CD and saw a live demo of automated deployment. It was fascinating to see how DevOps bridges coding and operations efficiently.",
+                    keyInsights: [
+                        "Understanding the challenges of manual deployments vs DevOps approach",
+                        "Learning the DevOps workflow and essential tools",
+                        "Exploring Continuous Integration (CI) benefits and deployment targets",
+                        "Understanding monitoring, rollback strategies, and cloud deployment"
+                    ],
+                    classActivities: [
+                        "Live demonstration of CI/CD pipeline workflow",
+                        "Comparison of static vs dynamic site deployment"
+                    ],
+                    examples: "Maleesha Sir showed how the CI/CD pipeline works on a DevOps website, illustrating the automation from code commit to deployment and monitoring.",
+                    extraResearch: "Afterward, I researched CI/CD tools like Jenkins, GitHub Actions, and Docker. I also learned how containerization simplifies deployment and explored cloud services such as AWS and Azure.",
+                    skills: ["DevOps", "CI/CD", "Cloud Deployment", "Containerization", "Monitoring"],
+                    selfImprovement: "I need to learn CI/CD tools like Jenkins, GitHub Actions, or GitLab CI, practice containerization with Docker, explore cloud platforms (AWS, Railway, Serverless), understand monitoring and alerting best practices, and learn DevOps tools practically by setting up CI/CD pipelines.",
+                    actionPlan: "I will set up a small app with a CI/CD pipeline, experiment with staging and production environments, monitor and analyze logs and metrics for practice, use containers to simplify deployment and rollback, and understand containerization and cloud deployment more deeply.",
+                    reflection: "The session emphasized that DevOps is more than automation—it's a mindset for faster, safer, and more reliable software delivery. Manual deployments are slow and error-prone, whereas CI/CD pipelines reduce human error and allow continuous improvement. I realized that understanding DevOps principles is crucial for modern software development and deployment."
+                }
+            }
+        ];
+
+        // Generate Lecture Cards
+        const lectureGrid = document.querySelector('.lecture-grid');
+        const mainContent = document.getElementById('main-content');
+        
+        function renderLectureCards() {
+            lectureGrid.innerHTML = '';
+            
+            lectures.forEach(lecture => {
+                const lectureCard = document.createElement('div');
+                lectureCard.className = `lecture-card ${lecture.category}`;
+                lectureCard.setAttribute('data-lecture-id', lecture.id);
+                
+                // Create tag elements with appropriate classes
+                const tagElements = lecture.tags.map(tag => {
+                    let tagClass = 'lecture-tag';
+                    if (lecture.category === 'workshop') tagClass += ' workshop';
+                    if (lecture.category === 'professional') tagClass += ' professional';
+                    if (lecture.category === 'technical') tagClass += ' technical';
+                    return `<span class="${tagClass}">${tag}</span>`;
+                }).join('');
+                
+                lectureCard.innerHTML = `
+                    <div class="lecture-content">
+                        <span class="lecture-date">${lecture.date}</span>
+                        <h3>Lecture ${lecture.id}: ${lecture.title}</h3>
+                        <div class="lecture-tags">
+                            ${tagElements}
+                        </div>
+                        <p>${lecture.description}</p>
+                    </div>
+                `;
+                lectureGrid.appendChild(lectureCard);
+            });
+            
+            // Add click event listeners to all lecture cards
+            document.querySelectorAll('.lecture-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const lectureId = this.getAttribute('data-lecture-id');
+                    showLectureDetail(lectureId);
+                });
+            });
+        }
+        
+        function showLectureDetail(lectureId) {
+            const lecture = lectures.find(w => w.id == lectureId);
+            if (!lecture) return;
+            
+            // Create image elements only if images exist
+            let imageSection = '';
+            if (lecture.images && lecture.images.length > 0) {
+                const imageElements = lecture.images.map(imagePath => {
+                    return `<img src="${imagePath}" alt="Lecture ${lecture.id} Image" class="lecture-image">`;
+                }).join('');
+                
+                // Determine if we need a special class for single images
+                const galleryClass = lecture.images.length === 1 ? 'image-gallery single-image' : 'image-gallery';
+                
+                imageSection = `
+                    <div class="detail-section">
+                        <h3>Lecture Images</h3>
+                        <div class="${galleryClass}">
+                            ${imageElements}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Create the detail page HTML
+            const detailHTML = `
+                <section class="detail-page">
+                    <div class="container">
+                        <a href="#" class="back-btn" id="back-to-home">
+                            <i class="fas fa-arrow-left"></i> Back to All Lectures
+                        </a>
+                        
+                        <div class="detail-header">
+                            <span class="detail-date">${lecture.date}</span>
+                            <h1>Lecture ${lecture.id}: ${lecture.title}</h1>
+                            <div class="lecture-tags">
+                                ${lecture.tags.map(tag => {
+                                    let tagClass = 'lecture-tag';
+                                    if (lecture.category === 'workshop') tagClass += ' workshop';
+                                    if (lecture.category === 'professional') tagClass += ' professional';
+                                    if (lecture.category === 'technical') tagClass += ' technical';
+                                    return `<span class="${tagClass}">${tag}</span>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="detail-content">
+                            <div class="detail-section">
+                                <h3>Summary</h3>
+                                <p>${lecture.detail.summary}</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h3>Key Insights</h3>
+                                <ul class="learning-outcomes">
+                                    ${lecture.detail.keyInsights.map(insight => `<li>${insight}</li>`).join('')}
+                                </ul>
+                            </div>
+                            
+                            ${lecture.detail.classActivities.length > 0 ? `
+                            <div class="detail-section">
+                                <h3>Class Activities</h3>
+                                <div class="activity-box">
+                                    <ul>
+                                        ${lecture.detail.classActivities.map(activity => `<li>${activity}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                            ` : ''}
+                            
+                            <div class="detail-section">
+                                <h3>Examples & Applications</h3>
+                                <p>${lecture.detail.examples}</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h3>Extra Research & Insights</h3>
+                                <p>${lecture.detail.extraResearch}</p>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h3>Skills Developed</h3>
+                                <div class="skills-developed">
+                                    ${lecture.detail.skills.map(skill => `<span class="skill-pill">${skill}</span>`).join('')}
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h3>Areas of Self-Improvement</h3>
+                                <div class="improvement-box">
+                                    <p>${lecture.detail.selfImprovement}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h3>Action Plan</h3>
+                                <div class="action-plan">
+                                    <p>${lecture.detail.actionPlan}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h3>Personal Reflection</h3>
+                                <blockquote class="reflection">
+                                    ${lecture.detail.reflection}
+                                </blockquote>
+                            </div>
+                            
+                            ${imageSection}
+                        </div>
+                    </div>
+                </section>
+            `;
+            
+            // Replace main content with detail page
+            mainContent.innerHTML = detailHTML;
+            
+            // Add event listener to back button
+            document.getElementById('back-to-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                location.reload(); // This will reload the page to show the home view
+            });
+            
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+        
+        // Initialize the page
+        renderLectureCards();
+    </script>
+</body>
+</html>
